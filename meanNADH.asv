@@ -27,32 +27,26 @@ count=count+1;
    
 end
 
-DataOut.Mean=mean(smean);
-
-%% For tdTom and NADH areas
 count=1;
 
 for i=2:2:(SSize)
-   img1=mat2gray(double(matrixRaw(:,:,i)));
-   
-   matrixMask=DataOut.MaskStack(:,:,count);
-   BW = imbinarize(img1, 'global');
-   matrixMaskStack=BW.*matrixMask;
- 
 
-areaTom(count)=size(nonzeros(BW),1);
+matrixMaskStack=DataOut.MaskStack(:,:,count);
+   matrixMaskStack=matrixRaw(:,:,i).*matrixMaskStack;
+
+areaTom(count)=size(nonzeros(matrixMaskStack),1)
 
 DataOut.AreaTom(count)=areaTom(count);
-DataOut.StacktdTomPercent(count)=areaTom(count)/sarea(count);
+DataOut.StacktdTomPercent(count)=areaTom(count)/size(nonzeros(matrixMaskStack),1);
 
-
-DataOut.StacktdTomMean(count)=nanmean((matrixMaskStack(~isnan(matrixMaskStack))));
+matrixMaskStack.*
+DataOut.StacktdTomMean(count)=nanmean(nanmean(BW_f,2),1);
 count=count+1;
 end
 
 DataOut.tdTomPercent=mean(DataOut.StacktdTomPercent);
 DataOut.tdTomMean=mean(DataOut.StacktdTomMean);
-
+DataOut.Mean=mean(smean);
 
 end
 
