@@ -25,6 +25,7 @@ img1=mat2gray(img(:,:,i));
 BW = imbinarize(img1, 'global');
 imshowpair(img1,BW,'montage')
 areaTom(count)=size(nonzeros(BW),1);
+
 count=count+1;
 end
 
@@ -40,7 +41,7 @@ count=count+1;
 end
 
 
-    ratioMx=areaTom./areaLive;
+ratioMx=areaTom./areaLive;
 
 
 dat.RatioMxs=mean(ratioMx);

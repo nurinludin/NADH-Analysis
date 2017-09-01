@@ -11,8 +11,8 @@ end
 pic={};
 
 img=double(img);
-% mask=data.mask;
-[dat]=meanNADH(img);
+% [dat]=meanNADH(img); %for images with NAD(P)H ONLY
+[dat]=meanNADH_wtdTom(img); %for images with NAD(P)H and tdTom fluor
 dat.Location=data;
 dat.Img=img(:,:,:);
 

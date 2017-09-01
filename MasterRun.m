@@ -2,7 +2,7 @@ function Analysis=MasterRun(Location)
 
 oLocation=pwd;
 
-cd(Location)
+cd(Location) %Put your file path to the images, it is the only input
 
 %% Rename Files by character size
 % files = dir('*.czi');
@@ -43,7 +43,7 @@ ne = sort_nat(ne);
 filePattern_f=sort_nat(filePattern_f);
 
 %% Running analysis through list
-for i=1:26
+for i=22:26 %length(ne)
 Loc=char(filePattern_f(i));
 nam=char(ne(i));
 disp(sprintf('Running analysis for image number %d',i)); 
@@ -52,10 +52,15 @@ close all;
 end
 %% NADH
 
-for i=1:length(ne)
+for i=1:26
 
 Analysis.Names(i,1)=ne(i);
 Analysis.Means(i,1)=Analysis.(char(ne{i})).Mean;
+% Analysis.Means(i,2)=Analysis.(char(ne{i})).tdTomPosPercent; %For tdTom
+%                                                                and NADH
+%                                                                images
+% Analysis.Means(i,3)=Analysis.(char(ne{i})).tdTomPosMean;
+% Analysis.Means(i,4)=Analysis.(char(ne{i})).tdTomNegMean;
 
 end
 
